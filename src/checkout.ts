@@ -7,8 +7,7 @@ export interface Checkout {
   scan(sku: string): Promise<void>;
 
   // function to calculate cart total
-  // TODO: please note that the returned value is not prefixed with currency here, could update it easily if its necessary
-  total(): Promise<number>;
+  total(): Promise<string>;
 }
 
 export type CheckoutConfig = {
@@ -57,7 +56,7 @@ class CheckoutImpl implements Checkout {
     return Promise.resolve();
   };
 
-  public total = async (): Promise<number> => {
+  public total = async (): Promise<string> => {
     const costs: number[] = await Promise.all(
       Array.from(this.cart, async ([sku, quantity]) => {
         const skuPrice = await this.catalogue.price(sku);
@@ -95,7 +94,7 @@ class CheckoutImpl implements Checkout {
       return total + lineItemCost;
     });
 
-    return Promise.resolve(totalCost);
+    return Promise.resolve(`$${totalCost.toFixed(2)}`);
   };
 }
 

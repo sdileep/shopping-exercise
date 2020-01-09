@@ -76,7 +76,7 @@ describe('Checkout Service Tests', () => {
     checkout.scan('atv');
     checkout.scan('vga');
     const total = await checkout.total();
-    expect(total).toBe(249.0);
+    expect(total).toBe('$249.00');
   });
 
   // Assert Example scenario 2
@@ -89,7 +89,7 @@ describe('Checkout Service Tests', () => {
     checkout.scan('ipd');
     checkout.scan('ipd');
     const total = await checkout.total();
-    expect(total).toBe(2718.95);
+    expect(total).toBe('$2718.95');
   });
 
   // Assert Example scenario 3
@@ -98,6 +98,6 @@ describe('Checkout Service Tests', () => {
     checkout.scan('vga');
     checkout.scan('ipd');
     const total = await checkout.total();
-    expect(total).toBe(1949.98);
+    expect(total).toBe('$1949.98');
   });
 });
